@@ -1,0 +1,14 @@
+# $Id: crontab 120 2010-10-10 17:47:05Z dave $
+# min hour day month day-of-week
+
+DB_ULYZ_USER=dave
+DB_ULYZ_PASSWORD=xxxx
+DB_ULYZ_HOST=localhost
+DB_ULYZ_EBAY=ebay
+
+*/4 * * * * cd ~/ulyz/perl && ps axhwww | grep 'perl.*eventd.pl start' | fgrep -v grep > /dev/null || exec ./eventd.pl start > /dev/null 2>&1 & # conditionally start eventd
+55 03 * * * ~/ulyz/automysqlbackup.sh
+59 03 1 * * mysql -u $DB_ULYZ_USER -p$DB_ULYZ_PASSWORD -e "DELETE FROM events WHERE DATEDIFF( NOW(), at ) > 7;" ebay
+59 03 * * * kill -s 2 `ps axhwww | grep 'perl.*eventd.pl start' | fgrep -v grep | sed 's/^ *//' | cut -d' ' -f1` || echo -e "\nno eventd to kill" # restart eventd
+20 08,20 * * * ( cd ~/ulyz && ./ghost.sh mandla,captainblueskyDE,captainblueskyES,captainblueskyFR,captainblueskyIT,ociobarato,xcgold )
+

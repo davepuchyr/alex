@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+   <!-- Servlets -->
+   <!-- http://www.kernelcrash.com/blog/using-perl-cgi-scripts-with-gwt/2009/06/16/ -->
+	<servlet>
+		<servlet-name>perl</servlet-name>
+		<servlet-class>org.mortbay.servlet.CGI</servlet-class>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>perl</servlet-name>
+      <url-pattern>/x/*</url-pattern>
+   </servlet-mapping>
+   
+	<!-- Default page to serve -->
+	<welcome-file-list>
+      <welcome-file>Publisher.html</welcome-file>
+	</welcome-file-list>
+</web-app>

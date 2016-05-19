@@ -1,0 +1,11 @@
+# don't send to /dev/null because dspam will think it's ham
+:0c
+*
+! tech@bigbox.es
+
+#LOGFILE="/tmp/procmail.$LOGNAME.log"
+#
+#:0 fhbw
+#* < 100000
+#| ~/.procmailrc.pl
+
